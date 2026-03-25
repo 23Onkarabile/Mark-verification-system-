@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+  
+    <link rel="stylesheet" href="sub-style.css">
+  
+</head>
+
+<body>
+
+<nav class="navbar">
+  <button type="button">Home</button>
+</nav>
+
+<div class="sub-card">
+  <h2 id="subjectTitle"></h2>
+</div>
+
+<table border="1">
+  <tr>
+    <th colspan="5" class="semtitle">1st Semester</th>
+  </tr>
+  
+  <tr>
+    <th>Tasks</th>
+    <th>Paper Mark</th>
+    <th>Lecture mark</th>
+    <th>Status</th>
+    <th>Upload image/doc</th>
+  </tr>
+  
+  <tr>
+    <td>Task 1</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td><div>
+      <form onsubmit="handleUpload(event, this)">
+        <input type="file" accept=".jpg,.docx,.doc,.pdf" onchange="previewFile(this); processImage(this)"> <input type="number" class="manual-mark" placeholder="Enter %" style="display:none;" oninput="updateMark(this)">
+        <p class="file-name"></p>
+        <img class="preview" style="max-width:100px; display:none;">
+        <button type="submit">Submit</button>
+      </form></div>
+    </td>
+  </tr>
+    <tr>
+    <td>Assignment 1</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td><div class="upload-cell">
+      <div>
+      <form onsubmit="handleUpload(event, this)">
+        <input type="file" accept=".jpg,.docx,.doc,.pdf" onchange="previewFile(this); processImage(this)"> <input type="number" class="manual-mark" placeholder="Enter %" 
+       style="display:none;" oninput="updateMark(this)">
+        <p class="file-name"></p>
+        <img class="preview" style="max-width:100px; display:none;">
+        <button type="submit">Submit</button>
+      </form></div>
+    </td>
+  </tr>
+  
+    <tr>
+    <th colspan="5" class="semtitle">2nd Semester</th>
+  </tr>
+  
+  <tr>
+    <th>Tasks</th>
+    <th>Paper Mark</th>
+    <th>Lecture mark</th>
+    <th>Status</th>
+    <th>Upload image/doc</th>
+  </tr>
+  
+  <tr>
+    <td>Task 2</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td><div>
+      <form onsubmit="handleUpload(event, this)">
+        <input type="file" accept=".jpg,.docx,.doc,.pdf" onchange="previewFile(this); processImage(this)"> <input type="number" class="manual-mark" placeholder="Enter %" style="display:none;" oninput="updateMark(this)">
+        <p class="file-name"></p>
+        <img class="preview" style="max-width:100px; display:none;">
+        <button type="submit">Submit</button>
+      </form></div>
+    </td>
+  </tr>
+    <tr>
+    <td>Assignment 2</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td><div>
+      <form onsubmit="handleUpload(event, this)">
+        <input type="file" accept=".jpg,.docx,.doc,.pdf" onchange="previewFile(this); processImage(this)"> <input type="number" class="manual-mark" placeholder="Enter %" style="display:none;" oninput="updateMark(this)">
+        <p class="file-name"></p>
+        <img class="preview" style="max-width:100px; display:none;">
+        <button type="submit">Submit</button>
+      </form></div>
+    </td>
+  </tr>
+
+<tr>
+    <th colspan="5" class="semtitle">3rd Semester</th>
+  </tr>
+  
+  <tr>
+    <th>Tasks</th>
+    <th>Paper Mark</th>
+    <th>Lecture mark</th>
+    <th>Status</th>
+    <th>Upload image/doc</th>
+  </tr>
+  
+  <tr>
+    <td>Task 3</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td><div>
+      <form onsubmit="handleUpload(event, this)">
+        <input type="file" accept=".jpg,.docx,.doc,.pdf" onchange="previewFile(this); processImage(this)"> <input type="number" class="manual-mark" placeholder="Enter %" style="display:none;" oninput="updateMark(this)">
+        <p class="file-name"></p>
+        <img class="preview" style="max-width:100px; display:none;">
+        <button type="submit">Submit</button>
+      </form></div>
+    </td>
+  </tr>
+    <tr>
+    <td>Assignment 3</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td><div>
+      <form onsubmit="handleUpload(event, this)">
+        <input type="file" accept=".jpg,.docx,.doc,.pdf" onchange="previewFile(this); processImage(this)"> <input type="number" class="manual-mark" placeholder="Enter %" style="display:none;" oninput="updateMark(this)">
+        <p class="file-name"></p>
+        <img class="preview" style="max-width:100px; display:none;">
+        <button type="submit">Submit</button>
+      </form></div>
+    </td>
+  </tr>
+
+</table>
+
+<script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+<script type="module" src="subject.js"></script>
+
+</body>
+</html>
