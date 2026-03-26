@@ -39,11 +39,13 @@ if (document.getElementById("subjectTitle")) {
 // 🔄 SYNC DATA (FIXED)
 // =========================
 function listenToMarkUpdates(id, statusCell, lectureCell = null) {
+
+  // ✅ PREVENT DUPLICATE LISTENERS
+  if (activeListeners[id]) return;
+
   const refDoc = doc(db, "marks", id);
 
-  onSnapshot(refDoc, (docSnap) => {
-    if (!docSnap.exists()) return;
-    const data = docSnap.data();
+  activeListeners[id] = onSnapshot(refDoc, (docSnap) => {
 
     // Update lecturer mark in table if cell provided
     if (lectureCell && data.lecturerMark !== undefined) {
@@ -209,8 +211,7 @@ async function updateMark(input) {
     prev = prev.previousElementSibling;
   }
 
-  const id = subject + "_" + currentSemester + "_" + taskName;
-
+  const id = generateId(subject, currentSemester, taskName);
   try {
     await setDoc(doc(db, "marks", id), {
       studentMark: Number(value)
@@ -244,8 +245,7 @@ async function loadLecturerMarks() {
     if (!taskCell || !lectureCell) continue;
 
     const taskName = taskCell.innerText.trim();
-    const id = subject + "_" + currentSemester + "_" + taskName;
-
+    const id = generateId(subject, currentSemester, taskName);
     // Attach real-time listener to every existing row on load
     listenToMarkUpdates(id, statusCell, lectureCell);
   }
