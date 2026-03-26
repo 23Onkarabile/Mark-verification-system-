@@ -72,7 +72,7 @@ function listenToMarkUpdates(id, statusCell, lectureCell = null) {
     statusCell.innerText = "WAITING FOR STUDENT ⏳";
     statusCell.style.color = "blue";
   }
-
+  }
 });
 }  
 
