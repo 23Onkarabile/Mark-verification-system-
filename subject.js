@@ -47,29 +47,33 @@ function listenToMarkUpdates(id, statusCell, lectureCell = null) {
 
   activeListeners[id] = onSnapshot(refDoc, (docSnap) => {
 
-    // Update lecturer mark in table if cell provided
-    if (lectureCell && data.lecturerMark !== undefined) {
-      lectureCell.innerText = data.lecturerMark + "%";
-    }
+  if (!docSnap.exists()) return;
 
-    // Compare logic
-    if (data.studentMark !== undefined && data.lecturerMark !== undefined) {
-      if (Number(data.studentMark) === Number(data.lecturerMark)) {
-        statusCell.innerText = "MATCH ✅";
-        statusCell.style.color = "green";
-      } else {
-        statusCell.innerText = "MISMATCH ❌";
-        statusCell.style.color = "red";
-      }
-    } else if (data.studentMark !== undefined && data.lecturerMark === undefined) {
-  statusCell.innerText = "WAITING FOR LECTURER ⏳";
-  statusCell.style.color = "orange";
-} else if (data.lecturerMark !== undefined && data.studentMark === undefined) {
-  statusCell.innerText = "WAITING FOR STUDENT ⏳";
-  statusCell.style.color = "blue";
-}
-  });
-}
+  const data = docSnap.data(); // ✅ THIS WAS MISSING
+
+  // Update lecturer mark
+  if (lectureCell && data.lecturerMark !== undefined) {
+    lectureCell.innerText = data.lecturerMark + "%";
+  }
+
+  // Compare logic
+  if (data.studentMark !== undefined && data.lecturerMark !== undefined) {
+    if (Number(data.studentMark) === Number(data.lecturerMark)) {
+      statusCell.innerText = "MATCH ✅";
+      statusCell.style.color = "green";
+    } else {
+      statusCell.innerText = "MISMATCH ❌";
+      statusCell.style.color = "red";
+    }
+  } else if (data.studentMark !== undefined && data.lecturerMark === undefined) {
+    statusCell.innerText = "WAITING FOR LECTURER ⏳";
+    statusCell.style.color = "orange";
+  } else if (data.lecturerMark !== undefined && data.studentMark === undefined) {
+    statusCell.innerText = "WAITING FOR STUDENT ⏳";
+    statusCell.style.color = "blue";
+  }
+
+});
 
 // =========================
 // 📸 FILE PREVIEW
