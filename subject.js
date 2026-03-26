@@ -18,6 +18,15 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const storage = getStorage(app);
 
+const activeListeners = {};
+
+function generateId(subject, semester, task) {
+  return `${subject}_${semester}_${task}`
+    .toLowerCase()
+    .replace(/\s+/g, "_")
+    .trim();
+}
+
 // 🔥 Get subject from URL
 const subject = new URLSearchParams(window.location.search).get("name");
 
@@ -50,10 +59,13 @@ function listenToMarkUpdates(id, statusCell, lectureCell = null) {
         statusCell.innerText = "MISMATCH ❌";
         statusCell.style.color = "red";
       }
-    } else if (data.studentMark !== undefined) {
-      statusCell.innerText = "WAITING FOR LECTURER ⏳";
-      statusCell.style.color = "orange";
-    }
+    } else if (data.studentMark !== undefined && data.lecturerMark === undefined) {
+  statusCell.innerText = "WAITING FOR LECTURER ⏳";
+  statusCell.style.color = "orange";
+} else if (data.lecturerMark !== undefined && data.studentMark === undefined) {
+  statusCell.innerText = "WAITING FOR STUDENT ⏳";
+  statusCell.style.color = "blue";
+}
   });
 }
 
@@ -136,7 +148,7 @@ async function processImage(input) {
     if (match) {
       const percentage = Number(match[1]);
       paperMarkCell.innerText = percentage + "%";
-      const id = subject + "_" + currentSemester + "_" + taskName;
+      const id = generateId(subject, currentSemester, taskName);
 
       const fileNameStr = subject + "_" + Date.now() + "_" + file.name;
       const storageRef = ref(storage, "proofs/" + fileNameStr);
