@@ -74,6 +74,7 @@ function listenToMarkUpdates(id, statusCell, lectureCell = null) {
   }
 
 });
+}  
 
 // =========================
 // 📸 FILE PREVIEW
